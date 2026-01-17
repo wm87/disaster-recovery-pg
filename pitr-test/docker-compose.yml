@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  pitr-test:
+    build: .
+    container_name: postgres-pitr-test
+    # Als postgres User ausführen
+    user: postgres
+    environment:
+      - PGDATA=/app/pgdata_test
+      - PGPORT=5433
+      - PGHOST=localhost
+      - PGUSER=postgres
+      - DB=testdb
+      - TABLE=testtable
+      - GPG_PASSWORD=MeinSicheresPasswort
+      - RECOVERY_TIMEOUT=60
+    ports:
+      - "5433:5433"
+    tty: true
+    stdin_open: true
+    restart: "no"
